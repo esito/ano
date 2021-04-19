@@ -1,0 +1,175 @@
+{
+  "name": "vscode-ano",
+  "displayName": "Ano",
+  "description": "Plugin for the ano language",
+  "version": "0.1.0",
+  "publisher": "Esito",
+  "license": "BSD-3-Clause",
+  "engines": {
+    "vscode": "^1.43.0"
+  },
+  "repository": {
+    "url": "https://github.com/esito/vscode-anonymizer"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onLanguage:ano",
+    "*"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "colors": [
+      {
+        "id": "ano.Comment",
+        "description": "Comments",
+        "defaults": {
+          "dark": "#608B4E",
+          "light": "#008000",
+          "highContrast": "#FFFF00"
+        }
+      },
+      {
+        "id": "ano.Table",
+        "description": "Table names",
+        "defaults": {
+          "dark": "#d49520",
+          "light": "#0000FF",
+          "highContrast": "#f5b223"
+        }
+      },
+      {
+        "id": "ano.Column",
+        "description": "Columns names",
+        "defaults": {
+          "dark": "#DCDCAA",
+          "light": "#0000ff91",
+          "highContrast": "#faec25"
+        }
+      },
+      {
+        "id": "ano.Datatype",
+        "description": "Datatypes",
+        "defaults": {
+          "dark": "#33d886f1",
+          "light": "#73ce2ace",
+          "highContrast": "#ff856f"
+        }
+      },
+      {
+        "id": "ano.Program",
+        "description": "Background decoration color for large numbers",
+        "defaults": {
+          "dark": "#8074d3",
+          "light": "#483D8B",
+          "highContrast": "#8074d3"
+        }
+      },
+      {
+        "id": "ano.Keyword1",
+        "description": "Commands",
+        "defaults": {
+          "dark": "#D197D9",
+          "light": "#0000FF",
+          "highContrast": "#87CEFA"
+        }
+      },
+      {
+        "id": "ano.Keyword2",
+        "description": "Sub Commands",
+        "defaults": {
+          "dark": "#BED6FF",
+          "light": "#ad2c6d",
+          "highContrast": "#24eb24"
+        }
+      },
+      {
+        "id": "ano.Parameter",
+        "description": "Parameters",
+        "defaults": {
+          "dark": "#7FB347",
+          "light": "#e9a72c",
+          "highContrast": "#32e0f7"
+        }
+      },
+      {
+        "id": "ano.Names",
+        "description": "Names",
+        "defaults": {
+          "dark": "#808080",
+          "light": "#A9A9A9",
+          "highContrast": "#f12ee1"
+        }
+      },
+      {
+        "id": "ano.Anonymization",
+        "description": "Anomyzations",
+        "defaults": {
+          "dark": "#569CD6",
+          "light": "#ad7139",
+          "highContrast": "#40E0D0"
+        }
+      },
+      {
+        "id": "ano.Param",
+        "description": "Anomyzations",
+        "defaults": {
+          "dark": "#CE9178",
+          "light": "#c2219a",
+          "highContrast": "#40E0D0"
+        }
+      },
+      {
+        "id": "ano.Error",
+        "description": "Anomyzations",
+        "defaults": {
+          "dark": "#FFCCCC",
+          "light": "#FFCCCC",
+          "highContrast": "#FFCCCC"
+        }
+      }
+    ],
+    "languages": [
+      {
+        "id": "ano",
+        "extensions": [
+          ".ano"
+        ],
+        "aliases": [
+          "Anonymizer",
+          "antlr"
+        ]
+      }
+    ]
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "lint": "eslint . --ext .ts,.tsx",
+    "watch": "tsc -watch -p ./",
+    "build": "cd antlr && npm run build && cd .. && npm run compile"
+  },
+  "dependencies": {
+    "@types/node": "^14.14.6",
+    "antlr4ts": "^0.5.0-alpha.4",
+    "markdown-loader": "^6.0.0"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.32.0",
+    "@typescript-eslint/eslint-plugin": "^4.17.0",
+    "@typescript-eslint/parser": "^4.17.0",
+    "eslint": "^7.22.0",
+    "husky": "^4.3.8",
+    "lint-staged": "^10.5.4",
+    "prettier": "^2.2.1",
+    "ts-loader": "^8.1.0",
+    "typescript": "^4.2.3",
+    "webpack": "^5.30.0",
+    "webpack-cli": "^4.6.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
+  }
+}

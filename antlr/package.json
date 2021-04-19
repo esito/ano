@@ -1,0 +1,23 @@
+{
+  "name": "antlr_ano",
+  "description": "Antlr compile",
+  "author": "Esito",
+  "publisher": "esito-anonymizer",
+  "version": "0.0.1",
+  "dependencies": {
+    "@types/node": "^14.14.6",
+    "antlr4ts": "^0.5.0-alpha.4"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.6",
+    "antlr4ts-cli": "^0.5.0-alpha.4",
+    "typescript": "^4.1.3"
+  },
+  "scripts": {
+    "antlr": "antlr4ts -visitor -o out/parser -lib src/gen_java Ano.g4",
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -b",
+    "watch": "tsc -b -w",
+    "build": "run_ano_gen.cmd"
+  }
+}

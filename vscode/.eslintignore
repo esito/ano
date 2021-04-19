@@ -1,0 +1,3 @@
+src/parser/*
+antlr/src/gen_ts/*
+antlr/src/gen_java/*

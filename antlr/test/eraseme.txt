@@ -1,0 +1,50 @@
+table ADDRESS
+    column text HOMEADDRESS size 40
+    column integer POSTALCODE size 10
+    column integer ID size 10
+    column integer CUSTOMER_CUSTOMERNO size 10
+    primary-key ID
+table CUSTOMER
+    column text CREDITCARD size 16
+    column integer CUSTOMERNO size 10
+    column text EMAIL size 40
+    column text NAME size 40
+    column text PASSWORD size 40
+    column text PHONE size 20 
+    primary-key CUSTOMERNO
+table HOTELROOMCATEGORY
+    column decimal ACTUALPRICE size 10  scale 2
+    column date FROMDATE
+    column date TODATE
+    column integer HOTEL_ID size 10
+    column integer ROOMCATEGORY_ID size 10
+    primary-key HOTEL_ID, ROOMCATEGORY_ID, FROMDATE
+foreign-key
+    ADDRESS CUSTOMER_CUSTOMERNO
+    CUSTOMER CUSTOMERNO
+ 
+transformation PostCodeGeneralization
+
+// Forget Me - based on customer number
+task forgetMe
+{
+    erase CUSTOMER
+        where "CUSTOMERNO = %PARAMETER%"
+		mask NAME
+		    format "firstname lastname"
+		mask EMAIL
+		    format epost@email.com
+		    transform Email
+		{
+			// Anonymize identifiable columns
+			cascade ADDRESS
+				parent CUSTOMERNO
+				child CUSTOMER_CUSTOMERNO
+				mask HOMEADDRESS
+				    format "Home address"
+				mask POSTALCODE
+				    transform PostCodeGeneralization
+		}
+    erase HOTELROOMCATEGORY
+        where "(HOTEL_ID = %PARAMETER1% AND ROOMCATEGORY_ID = %PARAMETER2% AND FROMDATE = '%PARAMETER3%')"
+}
