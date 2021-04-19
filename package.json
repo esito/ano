@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "compile": "tsc -p ./",
+    "lint": "eslint . --ext .ts,.tsx",
+    "watch": "tsc -watch -p ./",
+    "build": "cd vscode && npm run build"
+  }
+}

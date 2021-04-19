@@ -6,9 +6,9 @@ import {
 } from "antlr4ts";
 import { ParseTree } from "antlr4ts/tree/ParseTree";
 import { TerminalNode } from "antlr4ts/tree/TerminalNode";
-import { AnoLexer } from "../parser/AnoLexer";
+import { AnoLexer } from "parser";
 
-import * as Ano from "../parser/AnoParser";
+import * as Ano from "parser/AnoParser";
 
 export const DATATYPES = "text,boolean,integer,decimal,date,datetime,time";
 export const CONVERSIONS =
@@ -65,21 +65,23 @@ export class AnoHolderClass implements AnoHolder {
   tokens: Token[];
   parser: Ano.AnoParser;
   foreignKeys: FK[] | undefined;
-  rules: ParseTree[]=[];
+  rules: ParseTree[] = [];
   constructor(content: string) {
     const lexer = new AnoLexer(CharStreams.fromString(content));
     const ch = new CommonTokenStream(lexer);
     this.parser = new Ano.AnoParser(ch);
     this.tree = this.parser.model();
     this.tokens = ch.getTokens();
-    this.flatten(this.rules,this.tree);
+    this.flatten(this.rules, this.tree);
   }
 
-  flatten(rules: ParseTree[],node:ParserRuleContext){
-    const ch=node.children;
-    if(ch){
+  flatten(rules: ParseTree[], node: ParserRuleContext) {
+    const ch = node.children;
+    if (ch) {
       rules.push(...ch);
-      ch.filter(x=> x instanceof ParserRuleContext).forEach(x=> this.flatten(rules,<ParserRuleContext>x));
+      ch.filter((x) => x instanceof ParserRuleContext).forEach((x) =>
+        this.flatten(rules, <ParserRuleContext>x)
+      );
     }
   }
 
@@ -106,7 +108,9 @@ export class AnoHolderClass implements AnoHolder {
     return this.foreignKeys;
   }
   getTableNameFromChild(cols: ParseTree[] | undefined, num: number) {
-    return cols && cols.length > num ? (<Ano.TableidContext>cols[num]).text : "";
+    return cols && cols.length > num
+      ? (<Ano.TableidContext>cols[num]).text
+      : "";
   }
   getTableName(ctx: ParserRuleContext) {
     switch (ctx?.constructor) {

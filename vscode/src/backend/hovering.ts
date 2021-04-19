@@ -1,5 +1,5 @@
 import { getActiveAno, AnoHolder } from "../backend/anoclass";
-import * as Ano from "../parser/AnoParser";
+import * as Ano from "parser/AnoParser";
 import { getError } from "./validation";
 import { readMarkdown } from "./assets";
 import { TerminalNode } from "antlr4ts/tree/TerminalNode";

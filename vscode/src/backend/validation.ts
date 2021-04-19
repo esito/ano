@@ -2,7 +2,7 @@ import { ParserRuleContext, RuleContext } from "antlr4ts";
 import { ErrorNode } from "antlr4ts/tree/ErrorNode";
 import { ParseTree } from "antlr4ts/tree/ParseTree";
 import { TerminalNode } from "antlr4ts/tree/TerminalNode";
-import * as Ano from "../parser/AnoParser";
+import * as Ano from "parser/AnoParser";
 import { DATATYPES, getActiveAno, RANDOMTYPES } from "./anoclass";
 
 export function getError(ctx: any): string | null {

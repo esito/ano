@@ -3,10 +3,12 @@
   "description": "Antlr compile",
   "author": "Esito",
   "publisher": "esito-anonymizer",
+  "exports": "./out/parser/index.ts",
   "version": "0.0.1",
   "dependencies": {
     "@types/node": "^14.14.6",
-    "antlr4ts": "^0.5.0-alpha.4"
+    "antlr4ts": "^0.5.0-alpha.4",
+    "parser": "file: ../antlr/out/parser"
   },
   "devDependencies": {
     "@types/node": "^14.14.6",

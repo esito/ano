@@ -1,10 +1,10 @@
 import { AnoHolder, getActiveAno } from "./anoclass";
-import * as Ano from "../parser/AnoParser";
-import { AnoLexer } from "../parser/AnoLexer";
+import * as Ano from "parser/AnoParser";
+import { AnoLexer } from "parser/AnoLexer";
 import { ParseTree } from "antlr4ts/tree/ParseTree";
 import { TerminalNode } from "antlr4ts/tree/TerminalNode";
 import { ParserRuleContext, Token } from "antlr4ts";
-import { AnoListener } from "../parser/AnoListener";
+import { AnoListener } from "parser/AnoListener";
 import { ParseTreeWalker } from "antlr4ts/tree/ParseTreeWalker";
 import { ParseTreeListener } from "antlr4ts/tree/ParseTreeListener";
 

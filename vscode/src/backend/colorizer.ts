@@ -1,7 +1,7 @@
 import { Token, ParserRuleContext } from "antlr4ts";
 import { ParseTree } from "antlr4ts/tree/ParseTree";
 import { TerminalNode } from "antlr4ts/tree/TerminalNode";
-import * as Ano from "../parser/AnoParser";
+import * as Ano from "parser/AnoParser";
 import { getActiveAno } from "./anoclass";
 import { Validation } from "./validation";
 
@@ -27,7 +27,7 @@ export interface ColorNode {
   word: string;
 }
 
-export function getColors():ColorNode[] {
+export function getColors(): ColorNode[] {
   const ano = getActiveAno();
   const colors: ColorNode[] = [];
   // Nodes
@@ -59,17 +59,15 @@ export function getColors():ColorNode[] {
       })
     );
 
-  new Validation()
-    .getErrors()
-    .forEach((token) =>
-      colors.push({
-        color: ColorEnum.Error,
-        line: token.line,
-        col: token.charPositionInLine,
-        word: token.text ?? "",
-      })
-    );
-    return colors;
+  new Validation().getErrors().forEach((token) =>
+    colors.push({
+      color: ColorEnum.Error,
+      line: token.line,
+      col: token.charPositionInLine,
+      word: token.text ?? "",
+    })
+  );
+  return colors;
 }
 
 function getColor(ctx: ParseTree): any[] | undefined {
