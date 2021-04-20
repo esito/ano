@@ -9,4 +9,6 @@ src
 antlr
 Ano.interp
 Ano.tokens
+AnoLexer.interp
+AnoLexet.tokens
 webpack.config.js
