@@ -2,3 +2,7 @@
 /.antlr/
 /files.txt
 /src/
+/out/
+!/out/parser/package.json
+!/out/parser/tsconfig.json
+

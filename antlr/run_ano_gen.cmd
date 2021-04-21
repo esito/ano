@@ -8,4 +8,5 @@ call javac @files.txt
 # call java org.antlr.v4.gui.TestRig Ano table -tree test/eraseme.ano
 call npm install
 call npm run antlr
+call npm run compile
 
