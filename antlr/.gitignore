@@ -2,7 +2,12 @@
 /.antlr/
 /files.txt
 /src/
-/out/
+/out/parser/*.ts
+/out/parser/*.js
+/out/parser/*.map
+/out/parser/*.tokens
+/out/parser/*.interp
+
 !/out/parser/package.json
-!/out/parser/tsconfig.json
+!/out/parser/index.ts
 
