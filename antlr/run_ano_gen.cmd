@@ -11,4 +11,5 @@ call npm run antlr
 copy "./index.ts" "./out/parser" /Y
 copy "./package.json" "./out/parser" /Y
 call npm run compile
-robocopy ".\out" "..\vscode\src\" *.ts /E
+robocopy ".\out\parser" "..\vscode\src\parser" *.ts /MIR
+call echo %CD%

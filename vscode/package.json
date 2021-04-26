@@ -152,8 +152,7 @@
   "dependencies": {
     "@types/node": "^14.14.6",
     "antlr4ts": "^0.5.0-alpha.4",
-    "markdown-loader": "^6.0.0",
-    "parser": "file:../antlr/out/parser"
+    "markdown-loader": "^6.0.0"
   },
   "devDependencies": {
     "@types/vscode": "^1.32.0",
