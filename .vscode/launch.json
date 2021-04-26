@@ -1,28 +1,25 @@
 {
-	"version": "0.2.0",
-	"configurations": [
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Test Antlr",
-            "skipFiles": [
-                "<node_internals>/**"
-            ],
-			"program": "${workspaceRoot}/antlr/out/test.js",
-			"cwd": "${workspaceRoot}/antlr",
-            "preLaunchTask": "npm: compile",
-            "outFiles": ["${workspaceRoot}/antlr/out/*.js"]
-        },
-		{
-            "name": "Launch Extension",
-            "type": "extensionHost",
-            "request": "launch",
-            "runtimeExecutable": "${execPath}",
-            "args": ["--extensionDevelopmentPath=${workspaceRoot}" ],
-            "stopOnEntry": false,
-            "sourceMaps": true,
-            "outFiles": [ "${workspaceRoot}vscode/out/**/*.js" ],
-            "preLaunchTask": "npm: watch"
-        }
-	]
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Launch Extension",
+      "type": "extensionHost",
+      "request": "launch",
+      "runtimeExecutable": "${execPath}",
+      "args": ["--extensionDevelopmentPath=${workspaceFolder}/vscode", "--disable-extensions"],
+      "stopOnEntry": false,
+      "sourceMaps": true,
+      "outFiles": ["${workspaceRoot}/vscode/out/**/*.js"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Test Antlr",
+      "skipFiles": ["<node_internals>/**"],
+      "program": "${workspaceRoot}/antlr/test/test.js",
+      "cwd": "${workspaceRoot}/antlr",
+      "preLaunchTask": "npm: compileAntlr",
+      "outFiles": ["${workspaceRoot}/antlr/out/*.js"]
+    }
+  ]
 }

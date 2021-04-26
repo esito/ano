@@ -1,7 +1,7 @@
 import { Token, ParserRuleContext } from "antlr4ts";
 import { ParseTree } from "antlr4ts/tree/ParseTree";
 import { TerminalNode } from "antlr4ts/tree/TerminalNode";
-import * as Ano from "parser/AnoParser";
+import * as Ano from "../parser/AnoParser";
 import { getActiveAno } from "./anoclass";
 import { Validation } from "./validation";
 

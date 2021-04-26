@@ -4,9 +4,11 @@ md %OUTDIR%
 java -Xmx500M org.antlr.v4.Tool -o %OUTDIR% -lib %OUTDIR% Ano.g4
 dir /b /s %OUTDIR% | findstr \.java > files.txt
 call javac @files.txt
-# call java org.antlr.v4.gui.TestRig Ano table -tokens test/eraseme.ano
-# call java org.antlr.v4.gui.TestRig Ano table -tree test/eraseme.ano
+:: call java org.antlr.v4.gui.TestRig Ano table -tokens test/eraseme.ano
+:: call java org.antlr.v4.gui.TestRig Ano table -tree test/eraseme.ano
 call npm install
 call npm run antlr
+copy "./index.ts" "./out/parser" /Y
+copy "./package.json" "./out/parser" /Y
 call npm run compile
-
+robocopy ".\out" "..\vscode\src\" *.ts /E

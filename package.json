@@ -1,8 +1,8 @@
 {
   "scripts": {
-    "compile": "tsc -p ./",
-    "lint": "eslint . --ext .ts,.tsx",
-    "watch": "tsc -watch -p ./",
-    "build": "cd vscode && npm run build"
+    "watch": "cd vscode && npm run watch",
+    "build": "cd vscode && npm run build",
+    "compile": "cd vscode && npm run compile",
+    "compileAntlr": "cd antlr && npm run compile"
   }
 }

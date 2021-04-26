@@ -1,0 +1,14 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "npm",
+      "script": "vscodewatch",
+      "path": "vscode/",
+      "group": "none",
+      "problemMatcher": [],
+      "label": "npm: vscodewatch - vscode",
+      "detail": "tsc -watch -p ./"
+    }
+  ]
+}

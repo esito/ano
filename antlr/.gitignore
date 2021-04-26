@@ -8,6 +8,4 @@
 /out/parser/*.tokens
 /out/parser/*.interp
 
-!/out/parser/package.json
-!/out/parser/index.ts
 

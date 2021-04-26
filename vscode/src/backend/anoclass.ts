@@ -6,9 +6,9 @@ import {
 } from "antlr4ts";
 import { ParseTree } from "antlr4ts/tree/ParseTree";
 import { TerminalNode } from "antlr4ts/tree/TerminalNode";
-import { AnoLexer } from "parser";
+import { AnoLexer } from "../parser";
 
-import * as Ano from "parser/AnoParser";
+import * as Ano from "../../parser/AnoParser";
 
 export const DATATYPES = "text,boolean,integer,decimal,date,datetime,time";
 export const CONVERSIONS =

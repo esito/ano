@@ -1,14 +1,15 @@
 {
-	"compilerOptions": {
-		"module": "commonjs",
-		"target": "ES2019",
-		"lib": ["ES2019"],
-		"outDir": "out",
-		"sourceMap": true,
-		"strict": true,
-		"rootDir": "src",
-		"noImplicitAny": false
-	},
-	"include": ["src"],
-	"exclude": ["node_modules", ".vscode-test", ".npm"]
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "ES2019",
+    "moduleResolution": "node",
+    "lib": ["ES2019"],
+    "outDir": "out",
+    "sourceMap": true,
+    "strict": true,
+    "rootDir": "src",
+    "noImplicitAny": false
+  },
+  "include": ["src", "node_modules/parser"],
+  "exclude": ["node_modules", ".vscode-test", ".npm"]
 }

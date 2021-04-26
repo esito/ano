@@ -1,5 +1,5 @@
 import { AnoHolder, getActiveAno, DATATYPES, RANDOMTYPES } from "./anoclass";
-import * as Ano from "parser/AnoParser";
+import * as Ano from "../parser/AnoParser";
 import { TerminalNode } from "antlr4ts/tree/TerminalNode";
 
 function arr(txt: string) {

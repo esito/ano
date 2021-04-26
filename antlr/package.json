@@ -19,6 +19,6 @@
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -b",
     "watch": "tsc -b -w",
-    "build": "run_ano_gen.cmd"
+    "build": "run_ano_gen.cmd && cd out/parser && npm link"
   }
 }
