@@ -147,7 +147,7 @@ export class AnoHolderClass implements AnoHolder {
       case Ano.CreateChildColumnsContext:
         return this.getTableName(<ParserRuleContext>ctx.parent?.parent?.parent);
       case Ano.TableContext:
-        return (<Ano.TableContext>ctx).tableid().text;
+        return (<Ano.TableContext>ctx).tableDef().text;
       case Ano.FkColsContext:
       case Ano.PropagateColumnContext:
         return this.getTableNameFromChild(ctx.children, 0);
@@ -157,16 +157,16 @@ export class AnoHolderClass implements AnoHolder {
   }
 
   getTableNames() {
-    return this.tree.table().map((x) => x.tableid().text);
+    return this.tree.table().map((x) => x.tableDef().text);
   }
   getTableDef(name: string) {
-    return this.tree.table().find((x) => x.tableid().text == name);
+    return this.tree.table().find((x) => x.tableDef().text == name);
   }
   getColumnDef(table: Ano.TableContext, name: string) {
-    return table.column().find((x) => x.columnid().text == name);
+    return table.column().find((x) => x.columnDef().text == name);
   }
   getColumnNames(table: Ano.TableContext | undefined) {
-    return table?.column().map((x) => x.columnid().text) ?? [];
+    return table?.column().map((x) => x.columnDef().text) ?? [];
   }
 
   getConversionNames() {

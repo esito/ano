@@ -72,8 +72,10 @@ export function getColors(): ColorNode[] {
 
 function getColor(ctx: ParseTree): any[] | undefined {
   switch (ctx.constructor) {
+    case Ano.TableDefContext:
     case Ano.TableidContext:
       return [ColorEnum.Table];
+    case Ano.ColumnDefContext:
     case Ano.ColumnidContext:
       return [ColorEnum.Column];
     case Ano.DatatypeContext:
