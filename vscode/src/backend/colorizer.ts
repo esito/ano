@@ -122,6 +122,7 @@ function getColor(ctx: ParseTree): any[] | undefined {
     case Ano.SourceContext:
       return [ColorEnum.Anonymization];
     case Ano.TextinContext:
+    case Ano.MapfileContext:
     case Ano.FilenameContext:
       return [ColorEnum.Parameter, ctx.text];
     case Ano.NumsizeContext:
