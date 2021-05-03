@@ -73,9 +73,11 @@ export function getColors(): ColorNode[] {
 function getColor(ctx: ParseTree): any[] | undefined {
   switch (ctx.constructor) {
     case Ano.TableDefContext:
+    case Ano.UTableidContext:
     case Ano.TableidContext:
       return [ColorEnum.Table];
     case Ano.ColumnDefContext:
+    case Ano.MaskColumnidContext:
     case Ano.ColumnidContext:
       return [ColorEnum.Column];
     case Ano.DatatypeContext:
@@ -134,6 +136,8 @@ function getColor(ctx: ParseTree): any[] | undefined {
       return [ColorEnum.Program];
     case Ano.ParamContext:
       return [ColorEnum.Param];
+    case Ano.UTaskidContext:
+    case Ano.MaskTaskidContext:
     case Ano.TaskidContext:
       return [ColorEnum.Names];
   }

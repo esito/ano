@@ -55,9 +55,11 @@ taskGroup:
 	'task' taskid sql? bracketStart (taskGroup | workTask)* bracketEnd;
 
 update:
-	'update' uTableid taskid? sql? selectionKey? where? anonymization*;
+	'update' uTableid uTaskid? sql? selectionKey? where? anonymization*;
 
 uTableid: id;
+
+uTaskid: id;
 
 selectionKey: 'selection-key' columnid;
 
@@ -70,7 +72,9 @@ propagateColumn: tableid '.' columnid;
 tempKey: 'temporary-value' textin;
 
 mask:
-	'mask' columnid maskTaskid? format? transform? uniqueMask? source*;
+	'mask' maskColumnid maskTaskid? format? transform? uniqueMask? source*;
+
+maskColumnid: id;
 
 maskTaskid: id;
 
