@@ -1,4 +1,3 @@
-import { SourceColumnContext } from './../parser/AnoParser';
 import { AnoHolder, getActiveAno, DATATYPES, RANDOMTYPES } from "./anoclass";
 import * as Ano from "../parser/AnoParser";
 import { TerminalNode } from "antlr4ts/tree/TerminalNode";
@@ -65,8 +64,6 @@ function getSuggestions(context: any, ano: AnoHolder, previousRule?: any): strin
       return arr(DATATYPES);
     case Ano.ColumnDefContext:
       return [...getDataTypeSuggestions(ctx), ...getSuggestions(getParentOfType(ctx, Ano.TableContext), ano, previousRule)];
-    case Ano.DistributeprogContext:
-      return ano.getDistributionNames();
     case Ano.BracketStartContext:
       return arr("update,delete,create,erase,sar");
     case Ano.SqlBeforeContext:
@@ -82,11 +79,7 @@ function getSuggestions(context: any, ano: AnoHolder, previousRule?: any): strin
     case Ano.SelectionKeyContext:
       return ano.getColumnNames(ano.getTableDef(ano.getTableName(ctx)));
     case Ano.WhereContext:
-      return [];
-    // case Ano.PropagateContext:
-    //   return ano.getTableNames();
-    // // case Ano.DotContext:
-    // //   return ano.getColumnNames(ano.getTableDef(ano.getTableName(ctx)));
+      return arr("mask,randomize,shuffle");
     case Ano.MaskContext:
       return ano.getColumnNames(ano.getTableDef(ano.getTableName(ctx)));
     case Ano.MaskTaskidContext:
@@ -101,6 +94,10 @@ function getSuggestions(context: any, ano: AnoHolder, previousRule?: any): strin
       return arr("unique,column,file,random-integer,random-decimal,random-time,random-date,random-datetime,mask,randomize,shuffle");
     case Ano.UniqueMaskContext:
       return arr("column,file,random-integer,random-decimal,random-time,random-date,random-datetime,sequence,mask,randomize,shuffle");
+    case Ano.SourceColumnContext:
+      return ano.getColumnNames(ano.getTableDef(ano.getTableName(ctx)));
+    case Ano.ScColumnidContext:
+      return arr("convert,file,random-integer,random-decimal,random-time,random-date,random-datetime,sequence,mask,randomize,shuffle");
     case Ano.RandomIntegerContext:
       return arr("random-decimal,random-time,random-date,random-datetime,sequence,mask,randomize,shuffle,update,delete,create,erase,sar");
     case Ano.RandomDecimalContext:
@@ -111,6 +108,8 @@ function getSuggestions(context: any, ano: AnoHolder, previousRule?: any): strin
       return arr("random-datetime,sequence,mask,randomize,shuffle,update,delete,create,erase,sar");
     case Ano.RandomdatetimeContext:
       return arr("sequence,mask,randomize,shuffle,update,delete,create,erase,sar");
+    case Ano.SourceSequenceContext:
+      return arr("mask,randomize,shuffle,update,delete,create,erase,sar,distribute");
     case Ano.FilenameContext:
       return arr("random-order,convert,mask,randomize,shuffle,update,delete,create,erase,sar");
     case Ano.RandomOrderContext:
@@ -145,30 +144,79 @@ function getSuggestions(context: any, ano: AnoHolder, previousRule?: any): strin
       return arr("percentage-noise,mask,randomize,shuffle,update,delete,create,erase,sar");
     case Ano.PercentageNoiseContext:
       return arr("mask,randomize,shuffle,update,delete,create,erase,sar");
-    case Ano.MapfileContext:
-      return arr("input,output,input-output,encrypted");
     case Ano.ShuffleContext:
       return ano.getColumnNames(ano.getTableDef(ano.getTableName(ctx)));
+    case Ano.ShColumnidContext:
+      return arr("map,temporary-value,propagate,update,delete,create,erase,sar");
+    case Ano.ShTaskidContext:
+      return arr("map,temporary-value,propagate,update,delete,create,erase,sar");
+    case Ano.MapfileContext:
+      return arr("input,output,input-output");
     case Ano.MapUsageContext:
-      return getSuggestions(ctx.parent, ano, previousRule);
+      return arr("encrypted,temporary-value,propagate,update,delete,create,erase,sar");
+    case Ano.EncryptedContext:
+      return arr("temporary-value,propagate,update,delete,create,erase,sar");
+    case Ano.TempKeyContext:
+      return arr("propagate,update,delete,create,erase,sar");
+    case Ano.PropagateContext:
+      return ano.getTableNames();
+    // // case Ano.DotContext:
+    // //   return ano.getColumnNames(ano.getTableDef(ano.getTableName(ctx))); ?
+    case Ano.PropagateColumnContext:
+      return arr("update,delete,create,erase,sar");
     case Ano.CreateContext:
-      return arr("selection-key,minimum-rows,mask,randomize,shuffle,distribute");
-    case Ano.CreateTableContext:
+      return ano.getTableNames();
+    case Ano.CTableidContext:
+      return arr("sql-after,sql-before,selection-key,minimum-rows,mask,randomize,shuffle,distribute");
+    case Ano.CTaskidContext:
+      return arr("sql-after,sql-before,selection-key,minimum-rows,mask,randomize,shuffle,distribute");
+    case Ano.MinRowsContext:
+      return arr("mask,randomize,shuffle");
+    case Ano.DistributeContext:
+      return ano.getDistributionNames();
+    case Ano.DistributeprogContext:
       return arr("table");
+    case Ano.CreateTableContext:
+      return ano.getTableNames();
+    // case Ano.CtTableidContext:
+    //   return arr("child");
     case Ano.CreateChildColumnsContext:
-      return arr("child");
+      return ano.getColumnNames(ano.getTableDef(ano.getTableName(ctx)));
+    // case Ano.CcColumnsContext:
+    //   return arr("parent");
     case Ano.CreateParentColumnsContext:
-      return arr("parent");
+      return ano.getColumnNames(ano.getTableDef(ano.getTableName(ctx)));
+    // case Ano.CpColumnsContext:
+    //   return arr("update,delete,create,erase,sar");
     case Ano.DeleteContext:
-      return arr("selection-key,where,method");
+      return ano.getTableNames();
+    // case Ano.DTableidContext:
+    //   return arr("sql-after,sql-before,selection-key,where,method");
+    // case Ano.DTaskidContext:
+    //   return arr("sql-after,sql-before,selection-key,where,method");
+    // case Ano.DWhereContext:
+    //   return arr("method,cascade");
     case Ano.MethodContext:
       return arr("cascading,not-in,not-exists");
+    case Ano.CascadingContext:
+      return arr("{");
+    case Ano.NotExistsContext:
+      return arr("{");
+    case Ano.NotInContext:
+      return arr("{");
+    // case Ano.SecondBracketStartContext:
+    //   return arr("cascade");
     case Ano.DeleteTableContext:
-      return arr("cascade");
-    case Ano.ChildColsContext:
-      return arr("child");
+      return ano.getTableNames();
+    // case Ano.DtTableidContext:
+    //   return arr("parent");
     case Ano.ParentColsContext:
-      return arr("parent");
+      return ano.getColumnNames(ano.getTableDef(ano.getTableName(ctx)));
+
+    //   case Ano.ChildColsContext:
+    //   return arr("child");
+
+
     case Ano.EraseContext:
       return arr("selection-key,sql-after,sql-before,where,setnull");
     case Ano.EraseTableContext:

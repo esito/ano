@@ -94,7 +94,9 @@ source:
 	| sourceRandom
 	| sourceSequence;
 
-sourceColumn: 'column' columnid convert?;
+sourceColumn: 'column' scColumnid convert?;
+
+scColumnid: id;
 
 sourceSequence: 'sequence' integer integer;
 
@@ -152,7 +154,9 @@ shColumnid: id;
 
 shTaskid: id;
 
-map: 'map' mapfile mapUsage 'encrypted'?;
+map: 'map' mapfile mapUsage encrypted?;
+
+encrypted: 'encrypted';
 
 mapfile: param;
 
@@ -165,7 +169,11 @@ output: 'output';
 inputOutput: 'input-output';
 
 create:
-	'create' tableid taskid? sql? selectionKey? minRows? anonymization* distribute*;
+	'create' cTableid cTaskid? sql? selectionKey? minRows? anonymization* distribute*;
+
+cTableid: id;
+
+cTaskid: id;
 
 distribute: 'distribute' distributeprog textin? createTable*;
 
