@@ -79,6 +79,7 @@ function getColor(ctx: ParseTree): any[] | undefined {
     case Ano.ColumnDefContext:
     case Ano.MaskColumnidContext:
     case Ano.RColumnidContext:
+    case Ano.ShColumnidContext:
     case Ano.ColumnidContext:
       return [ColorEnum.Column];
     case Ano.DatatypeContext:
@@ -146,6 +147,7 @@ function getColor(ctx: ParseTree): any[] | undefined {
     case Ano.UTaskidContext:
     case Ano.MaskTaskidContext:
     case Ano.RTaskidContext:
+    case Ano.ShTaskidContext:
     case Ano.TaskidContext:
       return [ColorEnum.Names];
   }

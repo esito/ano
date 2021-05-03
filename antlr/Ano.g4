@@ -146,7 +146,11 @@ flatNoise: 'flat-noise' decimal;
 
 percentageNoise: 'percentage-noise' decimal;
 
-shuffle: 'shuffle' columnid taskid?;
+shuffle: 'shuffle' shColumnid shTaskid?;
+
+shColumnid: id;
+
+shTaskid: id;
 
 map: 'map' mapfile mapUsage 'encrypted'?;
 
