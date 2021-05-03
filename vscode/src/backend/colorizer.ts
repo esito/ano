@@ -111,6 +111,7 @@ function getColor(ctx: ParseTree): any[] | undefined {
     case Ano.DistributeContext:
     case Ano.RConvertContext:
     case Ano.ConvertContext:
+    case Ano.RTransformContext:
     case Ano.TransformContext:
     case Ano.RandomTypeContext:
     case Ano.OffsetContext:
@@ -135,7 +136,7 @@ function getColor(ctx: ParseTree): any[] | undefined {
     case Ano.ParentColsContext:
       return [ColorEnum.Parameter];
     case Ano.NamespaceContext:
-    case Ano.RTransformContext:
+    case Ano.RTransformprogContext:
     case Ano.TransformprogContext:
     case Ano.ConvertprogContext:
     case Ano.DistributeprogContext:

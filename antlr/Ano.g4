@@ -129,9 +129,13 @@ rTaskid: id;
 
 rFormat: 'format' textin;
 
-rConvert: 'convert' convertprog;
+rConvert: 'convert' rConvertprog;
+rConvertprog: NAME;
 
-rTransform: 'transform' transformprog;
+rTransform: 'transform' rTransformprog;
+
+rTransformprog: NAME;
+
 rUniqueMask: 'unique';
 
 randomizeType: 'type';
