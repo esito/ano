@@ -69,10 +69,10 @@ function getSuggestions(context: any, ano: AnoHolder, previousRule?: any): strin
       return ano.getDistributionNames();
     case Ano.BracketStartContext:
       return arr("update,delete,create,erase,sar");
-    // case Ano.SqlBeforeContext:
-    //   return [];
-    // case Ano.SqlAfterContext:
-    //   return [];
+    case Ano.SqlBeforeContext:
+      return [];
+    case Ano.SqlAfterContext:
+      return [];
     case Ano.UpdateContext:
       return ano.getTableNames();
     case Ano.UTableidContext:
@@ -113,8 +113,12 @@ function getSuggestions(context: any, ano: AnoHolder, previousRule?: any): strin
       return arr("sequence,mask,randomize,shuffle,update,delete,create,erase,sar");
     case Ano.FilenameContext:
       return arr("random-order,convert,mask,randomize,shuffle,update,delete,create,erase,sar");
-    case Ano.ConvertprogContext:
+    case Ano.RandomOrderContext:
+      return arr("convert,mask,randomize,shuffle,update,delete,create,erase,sar");
+    case Ano.ConvertContext:
       return ano.getConversionNames();
+    case Ano.ConvertprogContext:
+      return arr("mask,randomize,shuffle,update,delete,create,erase,sar");
     case Ano.RandomizeContext:
       return ano.getColumnNames(ano.getTableDef(ano.getTableName(ctx)));
     case Ano.RColumnidContext:
@@ -126,8 +130,12 @@ function getSuggestions(context: any, ano: AnoHolder, previousRule?: any): strin
     case Ano.RFormatContext:
       return arr("convert,transform,unique,offset,flat-noise,percentage-noise,mask,randomize,shuffle,update,delete,create,erase,sar");
     case Ano.RConvertContext:
+      return ano.getConversionNames();
+    case Ano.RConvertprogContext:
       return arr("transform,unique,offset,flat-noise,percentage-noise,mask,randomize,shuffle,update,delete,create,erase,sar");
     case Ano.RTransformContext:
+      return ano.getTransformationNames();
+    case Ano.RTransformprogContext:
       return arr("unique,offset,flat-noise,percentage-noise,mask,randomize,shuffle,update,delete,create,erase,sar");
     case Ano.RUniqueMaskContext:
       return arr("offset,flat-noise,percentage-noise,mask,randomize,shuffle,update,delete,create,erase,sar");
