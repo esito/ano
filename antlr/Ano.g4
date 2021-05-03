@@ -120,8 +120,19 @@ randomDate: 'random-date' date date;
 randomdatetime: 'random-datetime' datetime datetime;
 
 randomize:
-	'randomize' columnid taskid? randomizeType randomType format? convert? transform? uniqueMask?
-		offset? flatNoise? percentageNoise?;
+	'randomize' rColumnid rTaskid? randomizeType randomType rFormat? rConvert? rTransform?
+		rUniqueMask? offset? flatNoise? percentageNoise?;
+
+rColumnid: id;
+
+rTaskid: id;
+
+rFormat: 'format' textin;
+
+rConvert: 'convert' convertprog;
+
+rTransform: 'transform' transformprog;
+rUniqueMask: 'unique';
 
 randomizeType: 'type';
 

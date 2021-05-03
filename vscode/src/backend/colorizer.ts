@@ -78,6 +78,7 @@ function getColor(ctx: ParseTree): any[] | undefined {
       return [ColorEnum.Table];
     case Ano.ColumnDefContext:
     case Ano.MaskColumnidContext:
+    case Ano.RColumnidContext:
     case Ano.ColumnidContext:
       return [ColorEnum.Column];
     case Ano.DatatypeContext:
@@ -104,13 +105,16 @@ function getColor(ctx: ParseTree): any[] | undefined {
     case Ano.PkContext:
       return [ColorEnum.Keyword2];
     case Ano.MaskContext:
+    case Ano.RFormatContext:
     case Ano.FormatContext:
     case Ano.MinRowsContext:
     case Ano.DistributeContext:
+    case Ano.RConvertContext:
     case Ano.ConvertContext:
     case Ano.TransformContext:
     case Ano.RandomTypeContext:
     case Ano.OffsetContext:
+    case Ano.RUniqueMaskContext:
     case Ano.UniqueMaskContext:
     case Ano.FlatNoiseContext:
     case Ano.PercentageNoiseContext:
@@ -130,6 +134,7 @@ function getColor(ctx: ParseTree): any[] | undefined {
     case Ano.ParentColsContext:
       return [ColorEnum.Parameter];
     case Ano.NamespaceContext:
+    case Ano.RTransformContext:
     case Ano.TransformprogContext:
     case Ano.ConvertprogContext:
     case Ano.DistributeprogContext:
@@ -138,6 +143,7 @@ function getColor(ctx: ParseTree): any[] | undefined {
       return [ColorEnum.Param];
     case Ano.UTaskidContext:
     case Ano.MaskTaskidContext:
+    case Ano.RTaskidContext:
     case Ano.TaskidContext:
       return [ColorEnum.Names];
   }
