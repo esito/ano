@@ -19,15 +19,8 @@ export function getCompletion(
   }
   const node = ano.findToken(line, char);
   const previousRule = node ? ano.findRule(node.tokenIndex - 1) : null;
-  //const previousPreviousRule = node ? ano.findRule(node.tokenIndex - 2) : null;
   const rule = node ? ano.findRule(node.tokenIndex) : null;
-  // if (node?.type == -1) {
-  //   return getSuggestions(previousRule, ano, previousPreviousRule);
-  // }  
   if (rule) list.push(...getSuggestions(previousRule, ano, rule));
-  //if (rule?.parent) list.push(...getSuggestions(rule?.parent, ano));
-  // if (previousRule) list.push(...getSuggestions(previousRule, ano));
-  // if (rule2?.parent) list.push(...getSuggestions(rule2?.parent, ano));
   return list;
 }
 function getDataTypeSuggestions(ctx: ParserRuleContext): string[] {
@@ -160,8 +153,6 @@ function getSuggestions(context: any, ano: AnoHolder, previousRule?: any): strin
       return arr("propagate,update,delete,create,erase,sar");
     case Ano.PropagateContext:
       return ano.getTableNames();
-    // case Ano.DotContext:
-    //   return ano.getColumnNames(ano.getTableDef(ano.getTableName(ctx))); ?
     case Ano.PropagateColumnContext:
       return arr("update,delete,create,erase,sar");
     case Ano.CreateContext:
@@ -178,16 +169,10 @@ function getSuggestions(context: any, ano: AnoHolder, previousRule?: any): strin
       return arr("table");
     case Ano.CreateTableContext:
       return ano.getTableNames();
-    // case Ano.CtTableidContext:
-    //   return arr("child");
     case Ano.CreateChildColumnsContext:
       return ano.getColumnNames(ano.getTableDef(ano.getTableName(ctx)));
-    // case Ano.CcColumnsContext:
-    //   return arr("parent");
     case Ano.CreateParentColumnsContext:
       return ano.getColumnNames(ano.getTableDef(ano.getTableName(ctx)));
-    // case Ano.CpColumnsContext:
-    //   return arr("update,delete,create,erase,sar");
     case Ano.DeleteContext:
       return ano.getTableNames();
     case Ano.DTableidContext:
@@ -210,12 +195,6 @@ function getSuggestions(context: any, ano: AnoHolder, previousRule?: any): strin
       return arr("cascade");
     case Ano.DeleteTableContext:
       return ano.getTableNames();
-    // case Ano.TableidDContext:
-    //   return arr("parent");
-    // case Ano.ParentColsContext:
-    //   return ano.getColumnNames(ano.getTableDef(ano.getTableName(ctx)));
-    // case Ano.ChildColsContext:
-    //   return arr("child");
     case Ano.EraseContext:
       return ano.getTableNames();
     case Ano.ETableidContext:
