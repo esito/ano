@@ -189,9 +189,15 @@ minRows: 'minimum-rows' posint;
 where: 'where' id;
 
 delete:
-	'delete' tableid taskid? sql? selectionKey? where? method? (
-		bracketStart deleteTable+ bracketEnd
+	'delete' dTableid dTaskid? sql? selectionKey? dWhere? method? (
+		sBracketStart deleteTable+ sBracketEnd
 	)?;
+
+dTableid: id;
+
+dTaskid: id;
+
+dWhere: 'where' id;
 
 method: 'method' cascading | notIn | notExists;
 
@@ -203,7 +209,7 @@ notExists: 'not-exists';
 
 deleteTable:
 	'cascade' tableid parentCols childCols (
-		(bracketStart deleteTable+ bracketEnd)
+		(tBracketStart deleteTable+ tBracketEnd)
 		| setNull
 	)?;
 
@@ -214,29 +220,52 @@ parentCols: 'parent' columns;
 setNull: 'setnull';
 
 erase:
-	'erase' tableid taskid? sql? selectionKey? where? maskColumn* (
-		bracketStart eraseTable+ bracketEnd
+	'erase' eTableid eTaskid? sql? selectionKey? sWhere? maskColumn* (
+		sBracketStart eraseTable+ sBracketEnd
 	)? setNull?;
+
+eTableid: id;
+
+eTaskid: id;
 
 eraseTable:
 	'cascade' tableid parentCols childCols maskColumn* (
-		bracketStart eraseTable+ bracketEnd
+		tBracketStart eraseTable+ tBracketEnd
 	)? setNull?;
 
 sar:
-	'sar' tableid taskid? sql? selectionKey? where? maskColumn* (
-		bracketStart sarTable+ bracketEnd
+	'sar' sTableid sTaskid? sql? selectionKey? sWhere? maskColumn* (
+		sBracketStart sarTable+ sBracketEnd
 	)?;
+
+sTableid: id;
+
+sTaskid: id;
+
+sWhere: 'where' id;
 
 sarTable:
 	'cascade' tableid parentCols childCols maskColumn* (
-		bracketStart sarTable+ bracketEnd
+		tBracketStart sarTable+ tBracketEnd
 	)?;
 
-maskColumn: 'mask' columnid format? transform?;
+maskColumn: 'mask' mColumnid mFormat? mTransform?;
+
+mColumnid: id;
+
+mFormat: 'format' textin;
+
+mTransform: 'transform' mTransformprog;
+mTransformprog: NAME;
 
 bracketStart: '{';
 bracketEnd: '}';
+
+sBracketStart: '{';
+sBracketEnd: '}';
+
+tBracketStart: '{';
+tBracketEnd: '}';
 
 columnid: id;
 tableid: id;

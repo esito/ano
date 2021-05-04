@@ -75,6 +75,9 @@ function getColor(ctx: ParseTree): any[] | undefined {
     case Ano.TableDefContext:
     case Ano.UTableidContext:
     case Ano.CTableidContext:
+    case Ano.DTableidContext:
+    case Ano.ETableidContext:
+    case Ano.STableidContext:
     case Ano.TableidContext:
       return [ColorEnum.Table];
     case Ano.ColumnDefContext:
@@ -82,6 +85,7 @@ function getColor(ctx: ParseTree): any[] | undefined {
     case Ano.ScColumnidContext:
     case Ano.RColumnidContext:
     case Ano.ShColumnidContext:
+    case Ano.MColumnidContext:
     case Ano.ColumnidContext:
       return [ColorEnum.Column];
     case Ano.DatatypeContext:
@@ -98,6 +102,8 @@ function getColor(ctx: ParseTree): any[] | undefined {
     case Ano.ColumnContext:
     case Ano.AnonymizationContext:
     case Ano.MaskColumnContext:
+    case Ano.DWhereContext:
+    case Ano.SWhereContext:
     case Ano.WhereContext:
     case Ano.CreateTableContext:
     case Ano.EraseTableContext:
@@ -109,12 +115,14 @@ function getColor(ctx: ParseTree): any[] | undefined {
       return [ColorEnum.Keyword2];
     case Ano.MaskContext:
     case Ano.RFormatContext:
+    case Ano.MFormatContext:
     case Ano.FormatContext:
     case Ano.MinRowsContext:
     case Ano.DistributeContext:
     case Ano.RConvertContext:
     case Ano.ConvertContext:
     case Ano.RTransformContext:
+    case Ano.MTransformContext:
     case Ano.TransformContext:
     case Ano.RandomTypeContext:
     case Ano.OffsetContext:
@@ -140,6 +148,7 @@ function getColor(ctx: ParseTree): any[] | undefined {
       return [ColorEnum.Parameter];
     case Ano.NamespaceContext:
     case Ano.RTransformprogContext:
+    case Ano.MTransformprogContext:
     case Ano.TransformprogContext:
     case Ano.RConvertprogContext:
     case Ano.ConvertprogContext:
@@ -152,6 +161,9 @@ function getColor(ctx: ParseTree): any[] | undefined {
     case Ano.RTaskidContext:
     case Ano.ShTaskidContext:
     case Ano.CTaskidContext:
+    case Ano.DTaskidContext:
+    case Ano.ETaskidContext:
+    case Ano.STaskidContext:
     case Ano.TaskidContext:
       return [ColorEnum.Names];
   }

@@ -87,7 +87,7 @@ function getSuggestions(context: any, ano: AnoHolder, previousRule?: any): strin
     case Ano.MaskColumnidContext:
       return arr("format,transform,unique,column,file,random-integer,random-decimal,random-time,random-date,random-datetime,sequence");
     case Ano.FormatContext:
-      return arr("transform,unique,column,file,random-integer,random-decimal,random-time,random-date,random-datetime,sequence,mask,randomize,shuffle");
+      return arr("transform,unique,column,file,random-integer,random-decimal,random-time,random-date,random-datetime,sequence,mask,randomize,shuffle,map,temporary-value,propagate");
     case Ano.TransformContext:
       return ano.getTransformationNames();
     case Ano.TransformprogContext:
@@ -97,27 +97,27 @@ function getSuggestions(context: any, ano: AnoHolder, previousRule?: any): strin
     case Ano.SourceColumnContext:
       return ano.getColumnNames(ano.getTableDef(ano.getTableName(ctx)));
     case Ano.ScColumnidContext:
-      return arr("convert,file,random-integer,random-decimal,random-time,random-date,random-datetime,sequence,mask,randomize,shuffle");
+      return arr("convert,file,random-integer,random-decimal,random-time,random-date,random-datetime,sequence,mask,randomize,shuffle,map,temporary-value,propagate");
     case Ano.RandomIntegerContext:
-      return arr("random-decimal,random-time,random-date,random-datetime,sequence,mask,randomize,shuffle,update,delete,create,erase,sar");
+      return arr("random-decimal,random-time,random-date,random-datetime,sequence,mask,randomize,shuffle,map,temporary-value,propagate,update,delete,create,erase,sar");
     case Ano.RandomDecimalContext:
-      return arr("random-time,random-date,random-datetime,sequence,mask,randomize,shuffle,update,delete,create,erase,sar");
+      return arr("random-time,random-date,random-datetime,sequence,mask,randomize,shuffle,map,temporary-value,propagate,update,delete,create,erase,sar");
     case Ano.RandomTimeContext:
-      return arr("random-date,random-datetime,sequence,mask,randomize,shuffle,update,delete,create,erase,sar");
+      return arr("random-date,random-datetime,sequence,mask,randomize,shuffle,map,temporary-value,propagate,update,delete,create,erase,sar");
     case Ano.RandomDateContext:
-      return arr("random-datetime,sequence,mask,randomize,shuffle,update,delete,create,erase,sar");
+      return arr("random-datetime,sequence,mask,randomize,shuffle,map,temporary-value,propagate,update,delete,create,erase,sar");
     case Ano.RandomdatetimeContext:
-      return arr("sequence,mask,randomize,shuffle,update,delete,create,erase,sar");
+      return arr("sequence,mask,randomize,shuffle,map,temporary-value,propagate,update,delete,create,erase,sar");
     case Ano.SourceSequenceContext:
-      return arr("mask,randomize,shuffle,update,delete,create,erase,sar,distribute");
+      return arr("mask,randomize,shuffle,map,temporary-value,propagate,update,delete,create,erase,sar,distribute");
     case Ano.FilenameContext:
-      return arr("random-order,convert,mask,randomize,shuffle,update,delete,create,erase,sar");
+      return arr("random-order,convert,mask,randomize,shuffle,map,temporary-value,propagate,update,delete,create,erase,sar");
     case Ano.RandomOrderContext:
-      return arr("convert,mask,randomize,shuffle,update,delete,create,erase,sar");
+      return arr("convert,mask,randomize,shuffle,map,temporary-value,propagate,update,delete,create,erase,sar");
     case Ano.ConvertContext:
       return ano.getConversionNames();
     case Ano.ConvertprogContext:
-      return arr("mask,randomize,shuffle,update,delete,create,erase,sar");
+      return arr("mask,randomize,shuffle,map,temporary-value,propagate,update,delete,create,erase,sar");
     case Ano.RandomizeContext:
       return ano.getColumnNames(ano.getTableDef(ano.getTableName(ctx)));
     case Ano.RColumnidContext:
@@ -125,25 +125,25 @@ function getSuggestions(context: any, ano: AnoHolder, previousRule?: any): strin
     case Ano.RTaskidContext:
       return arr("type");
     case Ano.RandomTypeContext:
-      return arr("format,convert,transform,unique,offset,flat-noise,percentage-noise,mask,randomize,shuffle,update,delete,create,erase,sar");
+      return arr("format,convert,transform,unique,offset,flat-noise,percentage-noise,mask,randomize,shuffle,map,temporary-value,propagate,update,delete,create,erase,sar");
     case Ano.RFormatContext:
-      return arr("convert,transform,unique,offset,flat-noise,percentage-noise,mask,randomize,shuffle,update,delete,create,erase,sar");
+      return arr("convert,transform,unique,offset,flat-noise,percentage-noise,mask,randomize,shuffle,map,temporary-value,propagate,update,delete,create,erase,sar");
     case Ano.RConvertContext:
       return ano.getConversionNames();
     case Ano.RConvertprogContext:
-      return arr("transform,unique,offset,flat-noise,percentage-noise,mask,randomize,shuffle,update,delete,create,erase,sar");
+      return arr("transform,unique,offset,flat-noise,percentage-noise,mask,randomize,shuffle,map,temporary-value,propagate,update,delete,create,erase,sar");
     case Ano.RTransformContext:
       return ano.getTransformationNames();
     case Ano.RTransformprogContext:
-      return arr("unique,offset,flat-noise,percentage-noise,mask,randomize,shuffle,update,delete,create,erase,sar");
+      return arr("unique,offset,flat-noise,percentage-noise,mask,randomize,shuffle,map,temporary-value,propagate,update,delete,create,erase,sar");
     case Ano.RUniqueMaskContext:
-      return arr("offset,flat-noise,percentage-noise,mask,randomize,shuffle,update,delete,create,erase,sar");
+      return arr("offset,flat-noise,percentage-noise,mask,randomize,shuffle,map,temporary-value,propagate,update,delete,create,erase,sar");
     case Ano.OffsetContext:
-      return arr("flat-noise,percentage-noise,mask,randomize,shuffle,update,delete,create,erase,sar");
+      return arr("flat-noise,percentage-noise,mask,randomize,shuffle,map,temporary-value,propagate,update,delete,create,erase,sar");
     case Ano.FlatNoiseContext:
-      return arr("percentage-noise,mask,randomize,shuffle,update,delete,create,erase,sar");
+      return arr("percentage-noise,mask,randomize,shuffle,map,temporary-value,propagate,update,delete,create,erase,sar");
     case Ano.PercentageNoiseContext:
-      return arr("mask,randomize,shuffle,update,delete,create,erase,sar");
+      return arr("mask,randomize,shuffle,map,temporary-value,propagate,update,delete,create,erase,sar");
     case Ano.ShuffleContext:
       return ano.getColumnNames(ano.getTableDef(ano.getTableName(ctx)));
     case Ano.ShColumnidContext:
@@ -160,8 +160,8 @@ function getSuggestions(context: any, ano: AnoHolder, previousRule?: any): strin
       return arr("propagate,update,delete,create,erase,sar");
     case Ano.PropagateContext:
       return ano.getTableNames();
-    // // case Ano.DotContext:
-    // //   return ano.getColumnNames(ano.getTableDef(ano.getTableName(ctx))); ?
+    // case Ano.DotContext:
+    //   return ano.getColumnNames(ano.getTableDef(ano.getTableName(ctx))); ?
     case Ano.PropagateColumnContext:
       return arr("update,delete,create,erase,sar");
     case Ano.CreateContext:
@@ -190,12 +190,12 @@ function getSuggestions(context: any, ano: AnoHolder, previousRule?: any): strin
     //   return arr("update,delete,create,erase,sar");
     case Ano.DeleteContext:
       return ano.getTableNames();
-    // case Ano.DTableidContext:
-    //   return arr("sql-after,sql-before,selection-key,where,method");
-    // case Ano.DTaskidContext:
-    //   return arr("sql-after,sql-before,selection-key,where,method");
-    // case Ano.DWhereContext:
-    //   return arr("method,cascade");
+    case Ano.DTableidContext:
+      return arr("sql-after,sql-before,selection-key,where,method");
+    case Ano.DTaskidContext:
+      return arr("sql-after,sql-before,selection-key,where,method");
+    case Ano.DWhereContext:
+      return arr("method");
     case Ano.MethodContext:
       return arr("cascading,not-in,not-exists");
     case Ano.CascadingContext:
@@ -204,29 +204,46 @@ function getSuggestions(context: any, ano: AnoHolder, previousRule?: any): strin
       return arr("{");
     case Ano.NotInContext:
       return arr("{");
-    // case Ano.SecondBracketStartContext:
-    //   return arr("cascade");
+    case Ano.SBracketStartContext:
+      return arr("cascade");
+    case Ano.TBracketStartContext:
+      return arr("cascade");
     case Ano.DeleteTableContext:
       return ano.getTableNames();
-    // case Ano.DtTableidContext:
+    // case Ano.TableidDContext:
     //   return arr("parent");
-    case Ano.ParentColsContext:
-      return ano.getColumnNames(ano.getTableDef(ano.getTableName(ctx)));
-
-    //   case Ano.ChildColsContext:
+    // case Ano.ParentColsContext:
+    //   return ano.getColumnNames(ano.getTableDef(ano.getTableName(ctx)));
+    // case Ano.ChildColsContext:
     //   return arr("child");
-
-
     case Ano.EraseContext:
-      return arr("selection-key,sql-after,sql-before,where,setnull");
+      return ano.getTableNames();
+    case Ano.ETableidContext:
+      return arr("sql-after,sql-before,selection-key,where,mask,setnull");
+    case Ano.ETaskidContext:
+      return arr("sql-after,sql-before,selection-key,where,mask,setnull");
     case Ano.EraseTableContext:
-      return arr("cascade");
+      return ano.getTableNames();
     case Ano.SarContext:
-      return arr("selection-key,sql-after,sql-before,where,mask");
+      return ano.getTableNames();
+    case Ano.STableidContext:
+      return arr("sql-after,sql-before,selection-key,where,mask");
+    case Ano.STaskidContext:
+      return arr("sql-after,sql-before,selection-key,where,mask");
     case Ano.SarTableContext:
-      return arr("cascade");
+      return ano.getTableNames();
+    case Ano.SWhereContext:
+      return arr("mask");
     case Ano.MaskColumnContext:
-      return arr("format,transform");
+      return ano.getColumnNames(ano.getTableDef(ano.getTableName(ctx)));
+    case Ano.MColumnidContext:
+      return arr("format,transform,mask,{,cascade,}");
+    case Ano.MFormatContext:
+      return arr("transform,mask,{,}");
+    case Ano.MTransformContext:
+      return ano.getTransformationNames();
+    case Ano.MTransformprogContext:
+      return arr("mask,},{,cascade");
   }
   return getSuggestions(parent, ano, previousRule);
 }
