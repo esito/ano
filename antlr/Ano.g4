@@ -6,12 +6,18 @@
 grammar Ano;
 
 model:
-	table* fk* conversion* transformation* distribution* randomType* sql taskGroup* EOF;
+	table* fk* conversion* transformation* distribution* randomType* sql? taskGroup* EOF;
 
-table: 'table' tableid column* pk? unique*;
+table: 'table' tableDef column* pk? unique*;
 
-column: 'column' datatype columnid precision?;
+column: 'column' datatype columnDef precision?;
+
+tableDef: id;
+
+columnDef: id;
+
 datatype: NAME;
+
 precision: numsize scale?;
 numsize: 'size' posint;
 scale: 'scale' posint;
@@ -43,13 +49,17 @@ workTask: update | create | delete | erase | sar;
 sqlBefore: 'sql-before' param;
 sqlAfter: 'sql-after' param;
 
-sql: sqlBefore? sqlAfter?;
+sql: sqlBefore | sqlAfter;
 
 taskGroup:
-	'task' taskid sql bracketStart (taskGroup | workTask)* bracketEnd;
+	'task' taskid sql? bracketStart (taskGroup | workTask)* bracketEnd;
 
 update:
-	'update' tableid taskid? sql selectionKey? where? anonymization*;
+	'update' uTableid uTaskid? sql? selectionKey? where? anonymization*;
+
+uTableid: id;
+
+uTaskid: id;
 
 selectionKey: 'selection-key' columnid;
 
@@ -62,7 +72,11 @@ propagateColumn: tableid '.' columnid;
 tempKey: 'temporary-value' textin;
 
 mask:
-	'mask' columnid taskid? format? transform? uniqueMask? source*;
+	'mask' maskColumnid maskTaskid? format? transform? uniqueMask? source*;
+
+maskColumnid: id;
+
+maskTaskid: id;
 
 uniqueMask: 'unique';
 
@@ -80,7 +94,9 @@ source:
 	| sourceRandom
 	| sourceSequence;
 
-sourceColumn: 'column' columnid convert?;
+sourceColumn: 'column' scColumnid convert?;
+
+scColumnid: id;
 
 sourceSequence: 'sequence' integer integer;
 
@@ -106,8 +122,23 @@ randomDate: 'random-date' date date;
 randomdatetime: 'random-datetime' datetime datetime;
 
 randomize:
-	'randomize' columnid taskid? randomizeType randomType format? convert? transform? uniqueMask?
-		offset? flatNoise? percentageNoise?;
+	'randomize' rColumnid rTaskid? randomizeType randomType rFormat? rConvert? rTransform?
+		rUniqueMask? offset? flatNoise? percentageNoise?;
+
+rColumnid: id;
+
+rTaskid: id;
+
+rFormat: 'format' textin;
+
+rConvert: 'convert' rConvertprog;
+rConvertprog: NAME;
+
+rTransform: 'transform' rTransformprog;
+
+rTransformprog: NAME;
+
+rUniqueMask: 'unique';
 
 randomizeType: 'type';
 
@@ -117,9 +148,17 @@ flatNoise: 'flat-noise' decimal;
 
 percentageNoise: 'percentage-noise' decimal;
 
-shuffle: 'shuffle' columnid taskid?;
+shuffle: 'shuffle' shColumnid shTaskid?;
 
-map: 'map' filename mapUsage 'encrypted'?;
+shColumnid: id;
+
+shTaskid: id;
+
+map: 'map' mapfile mapUsage encrypted?;
+
+encrypted: 'encrypted';
+
+mapfile: param;
 
 mapUsage: input | output | inputOutput;
 
@@ -130,7 +169,11 @@ output: 'output';
 inputOutput: 'input-output';
 
 create:
-	'create' tableid taskid? sql selectionKey? minRows? anonymization* distribute*;
+	'create' cTableid cTaskid? sql? selectionKey? minRows? anonymization* distribute*;
+
+cTableid: id;
+
+cTaskid: id;
 
 distribute: 'distribute' distributeprog textin? createTable*;
 
@@ -146,9 +189,15 @@ minRows: 'minimum-rows' posint;
 where: 'where' id;
 
 delete:
-	'delete' tableid taskid? sql selectionKey? where? method? (
-		bracketStart deleteTable+ bracketEnd
+	'delete' dTableid dTaskid? sql? selectionKey? dWhere? method? (
+		sBracketStart deleteTable+ sBracketEnd
 	)?;
+
+dTableid: id;
+
+dTaskid: id;
+
+dWhere: 'where' id;
 
 method: 'method' cascading | notIn | notExists;
 
@@ -160,7 +209,7 @@ notExists: 'not-exists';
 
 deleteTable:
 	'cascade' tableid parentCols childCols (
-		(bracketStart deleteTable+ bracketEnd)
+		(tBracketStart deleteTable+ tBracketEnd)
 		| setNull
 	)?;
 
@@ -171,29 +220,52 @@ parentCols: 'parent' columns;
 setNull: 'setnull';
 
 erase:
-	'erase' tableid taskid? sql selectionKey? where? maskColumn* (
-		bracketStart eraseTable+ bracketEnd
+	'erase' eTableid eTaskid? sql? selectionKey? sWhere? maskColumn* (
+		sBracketStart eraseTable+ sBracketEnd
 	)? setNull?;
+
+eTableid: id;
+
+eTaskid: id;
 
 eraseTable:
 	'cascade' tableid parentCols childCols maskColumn* (
-		bracketStart eraseTable+ bracketEnd
+		tBracketStart eraseTable+ tBracketEnd
 	)? setNull?;
 
 sar:
-	'sar' tableid taskid? sql selectionKey? where? maskColumn* (
-		bracketStart sarTable+ bracketEnd
+	'sar' sTableid sTaskid? sql? selectionKey? sWhere? maskColumn* (
+		sBracketStart sarTable+ sBracketEnd
 	)?;
+
+sTableid: id;
+
+sTaskid: id;
+
+sWhere: 'where' id;
 
 sarTable:
 	'cascade' tableid parentCols childCols maskColumn* (
-		bracketStart sarTable+ bracketEnd
+		tBracketStart sarTable+ tBracketEnd
 	)?;
 
-maskColumn: 'mask' columnid format? transform?;
+maskColumn: 'mask' mColumnid mFormat? mTransform?;
+
+mColumnid: id;
+
+mFormat: 'format' textin;
+
+mTransform: 'transform' mTransformprog;
+mTransformprog: NAME;
 
 bracketStart: '{';
 bracketEnd: '}';
+
+sBracketStart: '{';
+sBracketEnd: '}';
+
+tBracketStart: '{';
+tBracketEnd: '}';
 
 columnid: id;
 tableid: id;

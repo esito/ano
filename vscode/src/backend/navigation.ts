@@ -16,10 +16,10 @@ export interface AnoLoc {
 function wrap(node: Token | undefined): AnoLoc | null {
   return node
     ? {
-        line: node.line,
-        col: node.charPositionInLine,
-        word: node.text ?? "",
-      }
+      line: node.line,
+      col: node.charPositionInLine,
+      word: node.text ?? "",
+    }
     : null;
 }
 
@@ -52,7 +52,7 @@ function findDefinition(
     case Ano.TableidContext: {
       const tname = ano.getTableName(<Ano.TableidContext>rule);
       const tctx = ano.getTableDef(tname);
-      return tctx?.tableid();
+      return tctx?.tableDef();
     }
     case Ano.ColumnidContext: {
       const tableName = ano.getTableName(<Ano.ColumnidContext>rule);
@@ -60,7 +60,7 @@ function findDefinition(
       const tableDef = ano.getTableDef(tableName);
       if (tableDef) {
         const cctx = ano.getColumnDef(tableDef, columnName);
-        return cctx?.columnid();
+        return cctx?.columnDef();
       }
       return undefined;
     }
