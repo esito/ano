@@ -59,10 +59,6 @@ function getSuggestions(context: any, ano: AnoHolder, node: Token | null): any {
       return arr(DATATYPES);
     case Ano.UpdateContext:
       return ano.getTableNames();
-    case Ano.SelectionKeyContext:
-      return ano.getColumnNames(ano.getTableDef(ano.getTableName(ctx)));
-    case Ano.MaskContext:
-      return ano.getColumnNames(ano.getTableDef(ano.getTableName(ctx)));
     case Ano.TransformContext:
       return ano.getTransformationNames();
     case Ano.SourceColumnContext:
@@ -70,8 +66,9 @@ function getSuggestions(context: any, ano: AnoHolder, node: Token | null): any {
     case Ano.ConvertContext:
       return ano.getConversionNames();
     case Ano.RandomizeContext:
-      return ano.getColumnNames(ano.getTableDef(ano.getTableName(ctx)));
     case Ano.ShuffleContext:
+    case Ano.SelectionKeyContext:
+    case Ano.MaskContext:
       return ano.getColumnNames(ano.getTableDef(ano.getTableName(ctx)));
     case Ano.PropagateContext:
       return ano.getTableNames();
@@ -82,7 +79,6 @@ function getSuggestions(context: any, ano: AnoHolder, node: Token | null): any {
     case Ano.CreateTableContext:
       return ano.getTableNames();
     case Ano.CreateChildColumnsContext:
-      return ano.getColumnNames(ano.getTableDef(ano.getTableName(ctx)));
     case Ano.CreateParentColumnsContext:
       return ano.getColumnNames(ano.getTableDef(ano.getTableName(ctx)));
     case Ano.DeleteContext:
@@ -103,9 +99,8 @@ function getSuggestions(context: any, ano: AnoHolder, node: Token | null): any {
       return ano.getColumnNames(ano.getTableDef(ano.getTableName(ctx)));
     default: {
       return Array.from(candidates.tokens.keys()).map((i) =>
-        ano.parser.vocabulary.getLiteralName(i)?.replace(/'/ig, '')
+        ano.parser.vocabulary.getLiteralName(i as number)?.replace(/'/gi, "")
       );
     }
   }
-
 }
