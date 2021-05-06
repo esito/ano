@@ -25,10 +25,8 @@ export function getCompletion(
   key: string
 ): string[] {
   const ano = getActiveAno();
-  if (ano.tokens.length === 1) {
-    return ["table"];
-  }
   const node = ano.findToken(line, char);
+  console.log(key + " " + node?.tokenIndex);
   const rule = node ? ano.findRule(node.tokenIndex) : null;
   if (rule) {
     const list = getSuggestions(rule, ano, node);
@@ -39,14 +37,21 @@ export function getCompletion(
     const list = getSuggestions(prev, ano, node);
     if (list.length) return list;
   }
+
   // Use completionproposals from grammar
   const core = new CodeCompletionCore(ano.parser);
   if (rule instanceof ErrorNode) {
-    const list = getFromGrammar(ano, (node?.tokenIndex as number) - 2);
-    const filtered = list.filter((x) => x && x.startsWith(key));
-    return filtered;
+    return fixHyphen(
+      getFromGrammar(ano, (node?.tokenIndex as number) - 2),
+      key
+    );
   }
-  return getFromGrammar(ano, node?.tokenIndex as number);
+  return fixHyphen(getFromGrammar(ano, node?.tokenIndex as number), key);
+}
+
+function fixHyphen(list: string[], key: string) {
+  const i =  key.indexOf("-") + 1;
+  return list.filter((x) => x && x.startsWith(key)).map((x) => x.substring(i));
 }
 
 function getSuggestions(context: any, ano: AnoHolder, node: Token | null): any {
