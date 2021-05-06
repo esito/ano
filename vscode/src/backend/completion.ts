@@ -46,11 +46,6 @@ export function getCompletion(
   return list;
 }
 
-
-function getParentOfType(ctx: any, type: any) {
-  return (ctx.context == Ano.ModelContext || ctx.constructor == type) ? ctx : getParentOfType(ctx.parent, type);
-}
-
 function getSuggestions(context: any, ano: AnoHolder, node: Token | null): any {
   const core = new CodeCompletionCore(ano.parser);
   const candidates = core.collectCandidates(node?.tokenIndex as number);
@@ -59,12 +54,7 @@ function getSuggestions(context: any, ano: AnoHolder, node: Token | null): any {
     return getSuggestions((<TerminalNode>context).parent, ano, node);
   }
   const ctx = <ParserRuleContext>context;
-  const parent = ctx.parent;
   switch (ctx.constructor) {
-    case Ano.ModelContext:
-      return arr("table,foreign-key,conversion,transformation,distribution,randomType,sql-after,sql-before,task");
-    case Ano.TableContext:
-      return [...arr("column,primary-key,unique-key"), ...getSuggestions(getParentOfType(ctx, Ano.ModelContext), ano, node)];
     case Ano.ColumnContext:
       return arr(DATATYPES);
     case Ano.UpdateContext:
