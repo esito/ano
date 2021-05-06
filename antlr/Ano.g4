@@ -6,7 +6,7 @@
 grammar Ano;
 
 model:
-	table* fk* conversion* transformation* distribution* randomType* sql taskGroup* EOF;
+	table* fk* conversion* transformation* distribution* randomType* sql? taskGroup* EOF;
 
 table: 'table' tableid column* pk? unique*;
 
@@ -46,10 +46,10 @@ sqlAfter: 'sql-after' param;
 sql: sqlBefore? sqlAfter?;
 
 taskGroup:
-	'task' taskid sql bracketStart (taskGroup | workTask)* bracketEnd;
+	'task' taskid sql? bracketStart (taskGroup | workTask)* bracketEnd;
 
 update:
-	'update' tableid taskid? sql selectionKey? where? anonymization*;
+	'update' tableid taskid? sql? selectionKey? where? anonymization*;
 
 selectionKey: 'selection-key' columnid;
 
@@ -130,7 +130,7 @@ output: 'output';
 inputOutput: 'input-output';
 
 create:
-	'create' tableid taskid? sql selectionKey? minRows? anonymization* distribute*;
+	'create' tableid taskid? sql? selectionKey? minRows? anonymization* distribute*;
 
 distribute: 'distribute' distributeprog textin? createTable*;
 
@@ -146,7 +146,7 @@ minRows: 'minimum-rows' posint;
 where: 'where' id;
 
 delete:
-	'delete' tableid taskid? sql selectionKey? where? method? (
+	'delete' tableid taskid? sql? selectionKey? where? method? (
 		bracketStart deleteTable+ bracketEnd
 	)?;
 
@@ -171,7 +171,7 @@ parentCols: 'parent' columns;
 setNull: 'setnull';
 
 erase:
-	'erase' tableid taskid? sql selectionKey? where? maskColumn* (
+	'erase' tableid taskid? sql? selectionKey? where? maskColumn* (
 		bracketStart eraseTable+ bracketEnd
 	)? setNull?;
 
@@ -181,7 +181,7 @@ eraseTable:
 	)? setNull?;
 
 sar:
-	'sar' tableid taskid? sql selectionKey? where? maskColumn* (
+	'sar' tableid taskid? sql? selectionKey? where? maskColumn* (
 		bracketStart sarTable+ bracketEnd
 	)?;
 
