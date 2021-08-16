@@ -1,4 +1,33 @@
 {
     "editor.insertSpaces": false,
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "yaml.customTags": [
+        "!And",
+        "!If",
+        "!Not",
+        "!Equals",
+        "!Or",
+        "!FindInMap sequence",
+        "!Base64",
+        "!Cidr",
+        "!Ref",
+        "!Sub",
+        "!GetAtt",
+        "!GetAZs",
+        "!ImportValue",
+        "!Select",
+        "!Select sequence",
+        "!Split",
+        "!Join sequence",
+        "!And sequence",
+        "!If sequence",
+        "!Not sequence",
+        "!Equals sequence",
+        "!Or sequence",
+        "!FindInMap",
+        "!Join",
+        "!Sub sequence",
+        "!ImportValue sequence",
+        "!Split sequence"
+    ]
 }

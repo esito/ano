@@ -4,7 +4,7 @@ This extension gives language support for the ano-langage made by Esito AS for t
 
 ## Features
 The extension will:
-* Colorize and 
+* Colorize 
 * Supply text-hovers 
 * Syntax completion
 

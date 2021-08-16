@@ -2,6 +2,7 @@
   "scripts": {
     "watch": "cd vscode && npm run watch",
     "build": "cd vscode && npm run build",
+    "update": "cd antlr && npm run update",
     "compile": "cd vscode && npm run compile",
     "compileAntlr": "cd antlr && npm run compile"
   }

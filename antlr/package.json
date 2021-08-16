@@ -21,7 +21,7 @@
     "compile": "tsc -b",
     "watch": "tsc -b -w",
     "build": "npm install && call run_ano_gen.cmd && call build_out && cd out/parser && npm link",
-    "update": "call run_ano_gen && call build_out",
+    "update": "call run_ano_gen && call build_out && cd ../vscode && npm run compile",
     "watch_and_update": "watch  'npm run update' ./  --filter=watchable.js "
   }
 }

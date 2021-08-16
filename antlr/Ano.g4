@@ -43,7 +43,7 @@ workTask: update | create | delete | erase | sar;
 sqlBefore: 'sql-before' param;
 sqlAfter: 'sql-after' param;
 
-sql: sqlBefore? sqlAfter?;
+sql: (sqlBefore sqlAfter?) | (sqlAfter);
 
 taskGroup:
 	'task' taskid sql? bracketStart (taskGroup | workTask)* bracketEnd;
