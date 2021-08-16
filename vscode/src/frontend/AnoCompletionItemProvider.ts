@@ -20,7 +20,9 @@ export class AnoCompletionItemProvider
         !(
           (ch >= "a" && ch <= "z") ||
           (ch >= "A" && ch <= "Z") ||
-          (ch >= "0" && ch <= "9")
+          (ch >= "0" && ch <= "9") ||
+          ch == "_" ||
+          ch == "-"
         )
       )
         break;

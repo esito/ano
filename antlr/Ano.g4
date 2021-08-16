@@ -150,7 +150,7 @@ delete:
 		bracketStart deleteTable+ bracketEnd
 	)?;
 
-method: 'method' cascading | notIn | notExists;
+method: 'method' (cascading | notIn | notExists);
 
 cascading: 'cascading';
 
