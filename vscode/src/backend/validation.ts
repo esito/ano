@@ -156,10 +156,15 @@ export class Validation {
     );
 
     numberOfSources += sourceCTX ? sourceCTX.length : 0;
+    console.log(ctx.text);
     const formatPoints =
-      ctx.text.match(/((?<!\\)(%s|%d|%f|%tF|%tT))/g)?.length || 0;
+      ctx.text.match(
+        /((?<!\\)(%(tA|ta|tB|tb|tC|tc|tD|td|te|tF|tH|th|tI|tj|tk|tl|tM|tm|tN|tp|tQ|tR|tr|tS|ts|tT|tY|ty|tZ|tz|a|b|c|d|e|f|\.\df|g|h|n|o|s|t|x)(?!\$)))/g
+      )?.length || 0;
 
-    const numberedFormatPoints = ctx.text.match(/(?<!\\)(%\d(d|s|f|tF|tT))/g);
+    const numberedFormatPoints = ctx.text.match(
+      /(?<!\\)(%\d\$(tA|ta|tB|tb|tC|tc|tD|td|te|tF|tH|th|tI|tj|tk|tl|tM|tm|tN|tp|tQ|tR|tr|tS|ts|tT|tY|ty|tZ|tz|a|b|c|d|e|f|\.\df|g|h|n|o|s|t|x))/g
+    );
 
     const highestNumberedFormatPonts = numberedFormatPoints
       ? numberedFormatPoints

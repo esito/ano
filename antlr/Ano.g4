@@ -59,7 +59,7 @@ propagate: 'propagate' propagateColumn (',' propagateColumn)*;
 
 propagateColumn: tableid '.' columnid;
 
-tempKey: 'temporary-value' textin;
+tempKey: 'temporary-value' (textin | date | datetime | TIMEFMT);
 
 mask:
 	'mask' columnid taskid? format? transform? uniqueMask? source*;
