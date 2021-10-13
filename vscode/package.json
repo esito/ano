@@ -2,7 +2,7 @@
   "name": "vscode-ano",
   "displayName": "Ano",
   "description": "Plugin for the ano language",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "publisher": "Esito",
   "license": "BSD-3-Clause",
   "engines": {

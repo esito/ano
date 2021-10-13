@@ -32,7 +32,7 @@ export function getCompletion(
     ntoken -= 2;
     rule = ano.findRule(ntoken);
   }
-  console.log(key + " " + ntoken);
+
   if (rule) {
     const list = filterFix(getSuggestions(rule, ano), key);
     if (list.length) return list;

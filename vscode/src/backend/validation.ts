@@ -156,7 +156,6 @@ export class Validation {
     );
 
     numberOfSources += sourceCTX ? sourceCTX.length : 0;
-    console.log(ctx.text);
     const formatPoints =
       ctx.text.match(
         /((?<!\\)(%(tA|ta|tB|tb|tC|tc|tD|td|te|tF|tH|th|tI|tj|tk|tl|tM|tm|tN|tp|tQ|tR|tr|tS|ts|tT|tY|ty|tZ|tz|a|b|c|d|e|f|\.\df|g|h|n|o|s|t|x)(?!\$)))/g

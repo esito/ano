@@ -3,6 +3,7 @@ import * as Ano from "../parser/AnoParser";
 import { AnoLexer } from "../parser/AnoLexer";
 import { ParseTree } from "antlr4ts/tree/ParseTree";
 import { TerminalNode } from "antlr4ts/tree/TerminalNode";
+import { ErrorNode } from "antlr4ts/tree/ErrorNode";
 import { ParserRuleContext, Token } from "antlr4ts";
 import { AnoListener } from "../parser/AnoListener";
 import { ParseTreeWalker } from "antlr4ts/tree/ParseTreeWalker";
@@ -22,6 +23,9 @@ export function formatDoc(indenting: string): AnoEdit[] {
   const indentTxt = indenting;
   const edits: AnoEdit[] = [];
   const ano = getActiveAno();
+  if (ano.rules.filter((e) => e?.constructor === ErrorNode).length != 0) {
+    return [];
+  }
   let indent = 0;
   let marker = 0;
 
@@ -80,9 +84,7 @@ export function formatDoc(indenting: string): AnoEdit[] {
         const txt1=t0.text;
         const txt2=t.text;
       }
- */ edits.push(
-        aedit
-      );
+ */ edits.push(aedit);
     }
   };
   const skip = (ctx: ParserRuleContext) => {
