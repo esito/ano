@@ -11,7 +11,8 @@ import {
 import { formatDoc } from "../backend/formatter";
 
 export class AnoDocumentFormattingEditProvider
-  implements DocumentFormattingEditProvider {
+  implements DocumentFormattingEditProvider
+{
   provideDocumentFormattingEdits(
     document: TextDocument,
     options: FormattingOptions,
@@ -31,6 +32,6 @@ export class AnoDocumentFormattingEditProvider
         list.push(new TextEdit(range, x.text));
       }
     });
-    return list;
+    return token.isCancellationRequested ? null : list;
   }
 }

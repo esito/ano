@@ -16,22 +16,16 @@ const isAnoFile = (document?: vscode.TextDocument | undefined): boolean =>
 
 // this method is called when vscode is activated for "ano"
 export function activate(context: vscode.ExtensionContext) {
-  let timeout: NodeJS.Timer | undefined = undefined;
   let activeEditor = vscode.window.activeTextEditor;
 
   function triggerUpdateDecorations() {
     if (!isAnoFile(activeEditor?.document)) return;
-    if (timeout) {
-      clearTimeout(timeout);
-      timeout = undefined;
+
+    if (activeEditor) {
+      const ano = createAnoHolder(activeEditor.document.getText());
+      setActiveAno(() => ano);
+      updateDecorations(activeEditor);
     }
-    timeout = setTimeout(() => {
-      if (activeEditor) {
-        const ano = createAnoHolder(activeEditor.document.getText());
-        setActiveAno(() => ano);
-        updateDecorations(activeEditor);
-      }
-    }, 500);
   }
 
   if (activeEditor) {
@@ -47,10 +41,11 @@ export function activate(context: vscode.ExtensionContext) {
     null,
     context.subscriptions
   );
+
   vscode.workspace.onDidChangeTextDocument(
-    (event) => {
+    async (event) => {
       if (activeEditor && event.document === activeEditor.document) {
-        triggerUpdateDecorations();
+        await triggerUpdateDecorations();
       }
     },
     null,

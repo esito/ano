@@ -221,6 +221,9 @@ export function formatDoc(indenting: string): AnoEdit[] {
     enterTempKey(ctx: Ano.TempKeyContext) {
       newline(ctx);
     }
+    enterUnique(ctx: Ano.UniqueContext) {
+      newline(ctx);
+    }
     enterSource(ctx: Ano.SourceContext) {
       newline(ctx);
       indent++;
