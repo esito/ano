@@ -1,5 +1,5 @@
 SET OUTDIR=.\src\gen_java
-SET CLASSPATH=.;%OUTDIR%;.\lib\antlr-4.9.1-complete.jar;%CLASSPATH%
+SET CLASSPATH=.;%OUTDIR%;.\lib\antlr-4.11.1-complete.jar;%CLASSPATH%
 md %OUTDIR%
 java -Xmx500M org.antlr.v4.Tool -o %OUTDIR% -lib %OUTDIR% Ano.g4
 dir /b /s %OUTDIR% | findstr \.java > files.txt

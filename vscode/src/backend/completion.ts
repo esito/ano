@@ -108,11 +108,6 @@ function getSuggestions(
         ? []
         : getSuggestions(prev, ano, null, true);
   }
-  function tryAgain(ctx: ParserRuleContext, ano: AnoHolder, prev: any) {
-    const index = ctx?.parent?.children?.indexOf(ctx);
-    if (!index || index < 1) return getSuggestions(ctx._parent, ano, prev);
-    return getSuggestions(ctx._parent?.getChild(index - 1), ano, prev, true);
-  }
 
   function getIdContextSuggestions(
     ctx: any,
