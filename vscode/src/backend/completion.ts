@@ -62,7 +62,7 @@ function getSuggestions(
 ): any {
   if (context === undefined) return [];
   if (context.constructor == TerminalNode) {
-    return getSuggestions((<TerminalNode>context).parent, ano, prev);
+    return getSuggestions((<TerminalNode>context).parent, ano, prev, secondTry);
   }
   const ctx = <ParserRuleContext>context;
   switch (ctx.constructor) {
@@ -70,7 +70,7 @@ function getSuggestions(
       return getIdContextSuggestions(ctx, ano, prev, secondTry);
     case Ano.BracketEndContext:
       /* tslint:disable-next-line */
-      return getSuggestions(prev, ano, prev);
+      return getSuggestions(prev, ano, prev, secondTry);
     case Ano.ColumnContext:
       return arr(DATATYPES);
     case Ano.ColumnidContext:
@@ -93,7 +93,7 @@ function getSuggestions(
         ? ano.getDistributionNames()
         : ["table"];
     case ErrorNode:
-      return getSuggestions(ctx.parent, ano, prev);
+      return getSuggestions(ctx.parent, ano, prev, secondTry);
     case Ano.MethodContext:
       return arr("cascading,not-in,not-exists");
     case Ano.CreateTableContext:
@@ -104,7 +104,9 @@ function getSuggestions(
       return [];
 
     default:
-      return secondTry ? [] : getSuggestions(prev, ano, null, true);
+      return secondTry || prev == null
+        ? []
+        : getSuggestions(prev, ano, null, true);
   }
   function tryAgain(ctx: ParserRuleContext, ano: AnoHolder, prev: any) {
     const index = ctx?.parent?.children?.indexOf(ctx);
@@ -123,7 +125,8 @@ function getSuggestions(
       return getSuggestions(
         prev!.parent!.getChild(1).getChild(0),
         ano,
-        ctx.parent
+        ctx.parent,
+        secondTry
       );
     if (ctx.parent.constructor == Ano.TableidContext) {
       return ["child"];

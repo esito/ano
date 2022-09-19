@@ -153,7 +153,7 @@
     "@types/node": "^16.11.6",
     "antlr4-c3": "^1.1.16",
     "antlr4ts": "^0.5.0-alpha.4",
-    "markdown-loader": "^6.0.0"
+    "markdown-loader": "^8.0.0"
   },
   "devDependencies": {
     "@types/vscode": "^1.43.0",
