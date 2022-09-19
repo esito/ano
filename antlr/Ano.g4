@@ -68,7 +68,7 @@ uniqueMask: 'unique';
 
 format: 'format' textin;
 
-transform: 'transform' transformprog;
+transform: 'transform' transformprog textin?;
 transformprog: NAME;
 
 convert: 'convert' convertprog;
