@@ -11,5 +11,5 @@
     "noImplicitAny": false
   },
   "include": ["src", "node_modules/parser"],
-  "exclude": ["node_modules", ".vscode-test", ".npm"]
+  "exclude": ["node_modules", ".vscode-test", ".npm", "*.js"]
 }

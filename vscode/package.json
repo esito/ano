@@ -2,7 +2,7 @@
   "name": "vscode-ano",
   "displayName": "Ano",
   "description": "Plugin for the ano language",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "publisher": "Esito",
   "license": "BSD-3-Clause",
   "engines": {
@@ -15,8 +15,7 @@
     "Other"
   ],
   "activationEvents": [
-    "onLanguage:ano",
-    "*"
+    "onLanguage:ano"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -146,7 +145,7 @@
   "scripts": {
     "compile": "tsc -p ./",
     "lint": "eslint . --ext .ts,.tsx",
-    "vscodewatch": "tsc -watch -p ./",
+    "watch": "tsc -watch -p ./",
     "build": "cd ../antlr && npm run build && cd ../vscode && npm install && npm run compile",
     "package": "npm run compile && vsce package"
   },

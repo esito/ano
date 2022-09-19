@@ -13,8 +13,10 @@ import * as Ano from "../parser/AnoParser";
 export const DATATYPES = "text,boolean,integer,decimal,date,datetime,time";
 export const CONVERSIONS =
   "String2Date,String2DateTime,String2Decimal,String2Integer,String2Time";
-export const TRANSFORMATIONS = "Email,CreditCard";
-export const DISTRIBUTIONS = "AllCombinations,EvenWithDeviation,SimpleSpread";
+export const TRANSFORMATIONS =
+  "Email,CreditCard,QuartileGeneralization,ReplaceDigits,SetNull,SomeNull";
+export const DISTRIBUTIONS =
+  "AllCombinations,EvenWithDeviation,SimpleSpread,SimpleSpreadWithFilter,NullDistro,MinPerParent";
 export const RANDOMTYPES = "decimal,date,datetime,time,integer";
 
 export function createAnoHolder(content: string): AnoHolder {
@@ -145,7 +147,9 @@ export class AnoHolderClass implements AnoHolder {
       case Ano.ParentColsContext:
         return this.getTableName(<ParserRuleContext>ctx.parent?.parent);
       case Ano.CreateChildColumnsContext:
-        return this.getTableName(<ParserRuleContext>ctx.parent?.parent?.parent);
+        return ctx.parent?.parent?.parent
+          ? this.getTableName(ctx.parent?.parent?.parent)
+          : [];
       case Ano.TableContext:
         return (<Ano.TableContext>ctx).tableid().text;
       case Ano.FkColsContext:

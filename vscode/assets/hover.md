@@ -115,7 +115,7 @@ Database operation task
 ## Format
 **format** textin  
 ## Transform
-**transform** [transformprog]
+**transform** [transformprog] textin?
 ## Convert
 **convert** [convertprog]
 ## SelectionKey
@@ -124,7 +124,7 @@ Database operation task
 ## Anonymization
 **anonymization** (mask | randomize | shuffle) map? tempKey? propagate?
 ## TempKey
-**temporary-value** textin 
+**temporary-value** textin
 `A temporary value may be defined for columns that are primary keys or unique columns. It is a temporary key that is used to temporarily set as the value before the system reads through all records`
 ## Propagate
 **propagate** propagateColumn (',' propagateColumn)*

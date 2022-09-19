@@ -3,11 +3,11 @@
   "tasks": [
     {
       "type": "npm",
-      "script": "vscodewatch",
+      "script": "watch",
       "path": "vscode/",
       "group": "none",
       "problemMatcher": [],
-      "label": "npm: vscodewatch - vscode",
+      "label": "npm: watch - vscode",
       "detail": "tsc -watch -p ./"
     }
   ]

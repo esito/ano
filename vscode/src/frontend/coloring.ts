@@ -26,17 +26,17 @@ function initColorNums() {
 function initColorMap() {
   const map = new Map<number, vscode.TextEditorDecorationType>();
   colorNums.forEach((i) => {
-    let deko: vscode.TextEditorDecorationType = vscode.window.createTextEditorDecorationType(
+    let decorator: vscode.TextEditorDecorationType = vscode.window.createTextEditorDecorationType(
       {
         color: new vscode.ThemeColor(`ano.${ColorEnum[i]}`),
       }
     );
     if (i == ColorEnum.Error) {
-      deko = vscode.window.createTextEditorDecorationType({
+      decorator = vscode.window.createTextEditorDecorationType({
         textDecoration: "underline dotted red",
       });
     }
-    map.set(i, deko);
+    map.set(i, decorator);
   });
   return map;
 }

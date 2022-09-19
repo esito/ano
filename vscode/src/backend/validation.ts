@@ -24,7 +24,7 @@ export class Validation {
       case Ano.IdContext:
         return this.getError(ctx.parent);
       case ErrorNode: // Parser Error
-        return "Unexpexcted symbol " + ctx.text;
+        return "Unexpected symbol " + ctx.text;
       case Ano.TableidContext:
         return this.validateTable(<Ano.TableidContext>ctx);
       case Ano.ColumnidContext:
@@ -47,12 +47,17 @@ export class Validation {
           ctx.childCols().columns()
         );
       case Ano.CreateTableContext:
-        return this.validateDep(
-          ctx.tableid().id().text,
-          this.ano.getTableName(<ParserRuleContext>ctx.parent?.parent),
-          ctx.createParentColumns().columns(),
-          ctx.createChildColumns().columns()
-        );
+        try {
+          return this.validateDep(
+            ctx.tableid().id().text,
+            this.ano.getTableName(<ParserRuleContext>ctx.parent?.parent),
+            ctx.createParentColumns().columns(),
+            ctx.createChildColumns().columns()
+          );
+        } catch (error) {
+          return "column missing";
+        }
+
       case Ano.EraseTableContext:
         return this.validateDep(
           this.ano.getTableName(<ParserRuleContext>ctx.parent),
@@ -149,11 +154,10 @@ export class Validation {
   validateTextin(ctx: Ano.TextinContext): string | null {
     let numberOfSources =
       ctx.parent?.constructor == Ano.RandomizeContext ? 1 : 0;
-    const sourceCTX:
-      | ParseTree[]
-      | undefined = ctx.parent?.parent?.children?.filter(
-      (x) => x.constructor == Ano.SourceContext
-    );
+    const sourceCTX: ParseTree[] | undefined =
+      ctx.parent?.parent?.children?.filter(
+        (x) => x.constructor == Ano.SourceContext
+      );
 
     numberOfSources += sourceCTX ? sourceCTX.length : 0;
     const formatPoints =
@@ -165,17 +169,17 @@ export class Validation {
       /(?<!\\)(%\d\$(tA|ta|tB|tb|tC|tc|tD|td|te|tF|tH|th|tI|tj|tk|tl|tM|tm|tN|tp|tQ|tR|tr|tS|ts|tT|tY|ty|tZ|tz|a|b|c|d|e|f|\.\df|g|h|n|o|s|t|x))/g
     );
 
-    const highestNumberedFormatPonts = numberedFormatPoints
+    const highestNumberedFormatPoints = numberedFormatPoints
       ? numberedFormatPoints
           .map((x) => parseInt(x.replace(/\D/g, "")))
           .reduce((highest, current) => (highest > current ? highest : current))
       : 0;
 
-    return Math.max(formatPoints, highestNumberedFormatPonts) ==
+    return Math.max(formatPoints, highestNumberedFormatPoints) ==
       numberOfSources || 0 == numberOfSources
       ? null
       : "the number of format points(e.g. %d) is different from the number of sources";
-    //find strings maching format strings with negative lookahead
-    // regex example %s maches \%s does not
+    //find strings matching format strings with negative lookahead
+    // regex example %s matches \%s does not
   }
 }
