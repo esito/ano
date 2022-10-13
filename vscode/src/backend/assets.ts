@@ -3,14 +3,14 @@ import path = require("path");
 
 export function readMarkdown(name: string) {
   const map = new Map<string, string[]>();
-  const lines = readFileSync(
-    path.resolve(__dirname, "..", "..", "assets", name),
-    "utf8"
-  )
+  //Create output channel
+
+  const lines = readFileSync(path.resolve(__dirname, name), "utf8")
     .toString()
     .replace(/[\r]+/g, "")
     .split("\n");
   let arr: string[];
+
   lines.forEach((x) => {
     if (x.startsWith("## ")) {
       arr = [];

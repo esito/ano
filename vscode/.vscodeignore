@@ -12,3 +12,4 @@ Ano.tokens
 AnoLexer.interp
 AnoLexet.tokens
 webpack.config.js
+node_modules/
